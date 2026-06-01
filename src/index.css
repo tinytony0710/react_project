@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+/* 💡 Step 1: 讓 Tailwind v4 支援透過 class="dark" 來切換深色模式 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --background: oklch(85% 0.05 115);
+    --foreground: oklch(0% 0 0);
+    --primary: oklch(75% 0.15 225);
+    --primary-foreground: oklch(38.15% 0.17314 281.222);
+    --secondary: oklch(37.5% 0.075 300);
+    --secondary-foreground: oklch(76.12% 0.11714 302.645);
+    
+    --border: oklch(57.859% 0.17307 341.429);
+  }
+
+  .dark {
+    --primary: oklch(20.816% 0.10155 271.879);
+    --primary-foreground: oklch(75.739% 0.13939 233.29);
+    --secondary: oklch(77.242% 0.1573 326.166);
+    --secondary-foreground: oklch(37.5% 0.075 300);
+    
+    /* 這裡自訂深色模式下的品牌顏色 (例如變成亮粉色) */
+    --brand: oklch(0.65 0.25 350); 
+  }
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  /* 你可以隨時在這裡加入你想自訂的全新顏色 */
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+}
+
+/* Header: 凸顯品牌，這裡示範用 Primary 當背景 */
+.header {
+  @apply bg-primary text-primary-foreground;
+  @apply transition-colors duration-1000;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}

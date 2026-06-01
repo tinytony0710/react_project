@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+/* 💡 Step 1: 讓 Tailwind v4 支援透過 class="dark" 來切換深色模式 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 💡 Step 2: 定義你想要的自訂顏色 (以品牌色 brand 為例) */
+@theme {
+  /* 格式必須為 --color-{名稱} */
+  --color-brand-light: #38bdf8; /* 淺色模式下的品牌色 (天藍) */
+  --color-brand-dark: #f43f5e;  /* 深色模式下的品牌色 (玫瑰紅) */
+  
+  /* 自訂背景與文字變數，用於全域 */
+  --color-main-bg: #ffffff;
+  --color-main-text: #0f172a;
+}
+
+/* 💡 Step 3: 當系統或按鈕切換到 .dark 時，覆寫這些全域顏色變數 */
+.dark {
+  --color-main-bg: #0f172a;
+  --color-main-text: #f8fafc;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 💡 Step 1: 讓 Tailwind 支援透過 class="dark" 切換主題 */
+@custom-variant dark (&:where(.dark, .dark *));
+/* @custom-variant dark (&:is(.dark *)); */
+/* 💡 Step 2: 告訴 Tailwind 將 CSS 變數對應到類別名稱 */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  /* 你可以隨時在這裡加入你想自訂的全新顏色 */
+  --color-brand: var(--brand);
+}
+
+/* 💡 Step 3: 在這裡定義你的顏色數值 */
+@layer base {
+  :root {
+    --background: oklch(0.6 0.18 250);        /* 純白 */
+    --foreground: oklch(0.145 0 0);   /* 極深灰/接近黑 */
+    
+    /* 這裡可以自訂你想要的品牌顏色 (例如淺色模式下是某個藍色) */
+    --brand: oklch(0.6 0.18 250); 
+  }
+
+  .dark {
+    --background: oklch(0.65 0.25 350);   /* 極深灰 */
+    --foreground: oklch(0.985 0 0);   /* 純白 */
+    
+    /* 這裡自訂深色模式下的品牌顏色 (例如變成亮粉色) */
+    --brand: oklch(0.65 0.25 350); 
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 💡 步驟 1：強制將 bg-background 與你自訂的 CSS 變數綁定 */
+@theme {
+  --color-background: var(--my-bg);
+  --color-foreground: var(--my-text);
+}
+
+/* 💡 步驟 2：在 layer 裡設定具體的藍色數值 */
+@layer base {
+  :root {
+    /* 淺色模式：直接給它想要的藍色 (例如亮藍色) */
+    --my-bg: #3b82f6; 
+    --my-text: #ffffff;
+  }
+
+  /* 💡 步驟 3：next-themes 切換時會加入 .dark 類別，在這裡換成深藍色 */
+  .dark {
+    /* 深色模式：深沉的海軍藍 */
+    --my-bg: #1e3a8a; 
+    --my-text: #dbeafe;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.985 0 0);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --destructive-foreground: oklch(0.985 0 0);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+  }
+}
+
+
+
+
+
+
+
+
+/* 定義主題變數 (以 HSL 為例，方便微調) */
+:root {
+  /* 基礎底色：白底黑字 */
+  --background: 0 0% 100%;       /* 純白 */
+  --foreground: 222 47% 11%;     /* 深藍黑 */
+
+  /* 輔助/次要：淺灰 */
+  --secondary: 210 40% 96%;      /* 偏藍的淺灰 */
+  --secondary-foreground: 222 47% 11%;
+
+  /* 品牌主要色：亮藍 */
+  --primary: oklch(75% 0.15 225);
+  --primary-foreground: oklch(90% 0.1 200); /* 近純白 */
+  
+  --border: hsl(214 32% 91%);         /* 線條色 */
+}
+
+/* 網頁整體框架佈局 */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  flex: 1; /* 讓中間區域自動撐滿剩餘高度 */
+}
+
+/* --- 各區塊變數套用 --- */
+
+/* Header: 凸顯品牌，這裡示範用 Primary 當背景 */
+.header {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+/* Sidebar: 使用 Secondary 做出視覺區隔 */
+.site-sidebar {
+  width: 250px;
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  padding: 2rem 1rem;
+  border-right: 1px solid hsl(var(--border));
+}
+
+.site-sidebar a.active {
+  color: hsl(var(--primary)); /* 側邊欄當前分頁用主要色高亮 */
+  font-weight: bold;
+}
+
+/* Main: 最乾淨的白底黑字，確保閱讀舒適 */
+.site-main {
+  flex: 1;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  padding: 2rem;
+}
+
+.btn-cta {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+/* Footer: 收尾區塊，適合用低彩度的 Secondary */
+.site-footer {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.875rem;
+  border-top: 1px solid hsl(var(--border));
+}
+
+
+
+
+
+
+
+
+
+
+
+
