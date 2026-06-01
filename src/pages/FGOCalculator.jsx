@@ -25,17 +25,17 @@ function FGOCalculator() {
         {
             setSelectedServants(prev => [...prev, {
                 ...servant,
-                currentAscension: 0, targetAscension: 4,
+                isSkipAscension: false, currentAscension: 0, targetAscension: 4,
 
-                currentSkill1: 1, targetSkill1: 10,
-                currentSkill2: 1, targetSkill2: 10,
-                currentSkill3: 1, targetSkill3: 10,
+                isSkipSkill1: false, currentSkill1: 1, targetSkill1: 10,
+                isSkipSkill2: false, currentSkill2: 1, targetSkill2: 10,
+                isSkipSkill3: false, currentSkill3: 1, targetSkill3: 10,
                 
-                currentExtraSkill1: 1, targetExtraSkill1: 10,
-                currentExtraSkill2: 1, targetExtraSkill2: 10,
-                currentExtraSkill3: 1, targetExtraSkill3: 10,
-                currentExtraSkill4: 1, targetExtraSkill4: 10,
-                currentExtraSkill5: 1, targetExtraSkill5: 10,
+                isSkipExtraSkill1: false, currentExtraSkill1: 1, targetExtraSkill1: 10,
+                isSkipExtraSkill2: false, currentExtraSkill2: 1, targetExtraSkill2: 10,
+                isSkipExtraSkill3: false, currentExtraSkill3: 1, targetExtraSkill3: 10,
+                isSkipExtraSkill4: false, currentExtraSkill4: 1, targetExtraSkill4: 10,
+                isSkipExtraSkill5: false, currentExtraSkill5: 1, targetExtraSkill5: 10,
             }]);
         }
     };
@@ -43,7 +43,7 @@ function FGOCalculator() {
     // 功能：更新特定從者的技能等級
     const handleUpdateLevel = (id, field, value) => {
         setSelectedServants(prev => prev.map(s => 
-            s.id === id ? { ...s, [field]: parseInt(value) } : s
+            s.id === id ? { ...s, [field]: value } : s
         ));
     };
     const calculateResults = () => {
@@ -51,16 +51,19 @@ function FGOCalculator() {
 
         selectedServants.forEach(servant => {
             
-            const current = servant.currentAscension;
-            const target = servant.targetAscension;
-            const neededAscensionStages = servant.ascension.slice(current, target);
-            neededAscensionStages.forEach(stage => {
-                Object.entries(stage).forEach(([matId, count]) => {
-                    totalRequired[matId] = (totalRequired[matId] || 0) + count;
+            if(!servant.isSkipAscension) {
+                const current = servant.currentAscension;
+                const target = servant.targetAscension;
+                const neededAscensionStages = servant.ascension.slice(current, target);
+                neededAscensionStages.forEach(stage => {
+                    Object.entries(stage).forEach(([matId, count]) => {
+                        totalRequired[matId] = (totalRequired[matId] || 0) + count;
+                    });
                 });
-            });
+            }
 
             [1,2,3].forEach(index => {
+                if(servant[`isSkipSkill${index}`]) return;
                 const current = servant[`currentSkill${index}`];
                 const target = servant[`targetSkill${index}`];
                 const neededSkillStages = servant.skill.slice(current, target);
@@ -72,6 +75,7 @@ function FGOCalculator() {
             });
             
             [1,2,3,4,5].forEach(index => {
+                if(servant[`isSkipExtraSkill${index}`]) return;
                 const current = servant[`currentExtraSkill${index}`];
                 const target = servant[`targetExtraSkill${index}`];
                 const neededSkillStages = servant.extra_skill.slice(current, target);
@@ -103,22 +107,26 @@ function FGOCalculator() {
                     <h3 className='mb-4 text-lg font-bold flex items-center gap-2'>{s.name}<span><img className='w-1/3' src={ClassImageMap[s.class]} alt="" /></span></h3>
                     <div className='flex gap-4 divide-x divide-gray-300'>
                     <div className='flex-1 p-4'>
-                        <label>當前靈基等級: </label>
+                        <label><input type="checkbox" checked={s.isSkipAscension} onChange={e => handleUpdateLevel(s.id, 'isSkipAscension', !s.isSkipAscension)} />
+                        略過 </label>
+                        <label>靈基: 當前等級 </label>
                         <select className='bg-white text-black border rounded-md' value={s.currentAscension} onChange={(e) => {handleUpdateLevel(s.id, 'currentAscension', e.target.value); handleUpdateLevel(s.id, 'targetAscension', Math.max(s.targetAscension, e.target.value))}}>
-                            {[...Array(4).keys()].map(i => <option key={i+1} value={i+1}>{i+1}</option>)}
+                            {[...Array(5).keys()].map(i => <option key={i} value={i}>{i}</option>)}
                         </select>
 
-                        <label style={{ marginLeft: '20px' }}>目標靈基等級: </label>
+                        <label style={{ marginLeft: '20px' }}>目標等級 </label>
                         <select className='bg-white text-black border rounded-md' value={s.targetAscension} onChange={(e) => {handleUpdateLevel(s.id, 'targetAscension', e.target.value); handleUpdateLevel(s.id, 'currentAscension', Math.min(s.currentAscension, e.target.value))}}>
-                            {[...Array(4).keys()].map(i => <option key={i+1} value={i+1}>{i+1}</option>)}
+                            {[...Array(5).keys()].map(i => <option key={i} value={i}>{i}</option>)}
                         </select>
                         {[1,2,3].map(index => <div key={index}>
-                            <label>當前技能{index}等級: </label>
+                            <label><input type="checkbox" checked={s[`isSkipSkill${index}`]} onChange={e => handleUpdateLevel(s.id, `isSkipSkill${index}`, !s[`isSkipSkill${index}`])} />
+                            略過 </label>
+                            <label>技能{index}: 當前等級 </label>
                             <select className='bg-white text-black border rounded-md' value={s[`currentSkill${index}`]} onChange={(e) => {handleUpdateLevel(s.id, `currentSkill${index}`, e.target.value); handleUpdateLevel(s.id, `targetSkill${index}`, Math.max(s[`targetSkill${index}`], e.target.value))}}>
                                 {[...Array(10).keys()].map(i => <option key={i+1} value={i+1}>{i+1}</option>)}
                             </select>
 
-                            <label style={{ marginLeft: '20px' }}>目標技能{index}等級: </label>
+                            <label style={{ marginLeft: '20px' }}>目標等級 </label>
                             <select className='bg-white text-black border rounded-md' value={s[`targetSkill${index}`]} onChange={(e) => {handleUpdateLevel(s.id, `targetSkill${index}`, e.target.value); handleUpdateLevel(s.id, `currentSkill${index}`, Math.min(s[`currentSkill${index}`], e.target.value))}}>
                                 {[...Array(10).keys()].map(i => <option key={i+1} value={i+1}>{i+1}</option>)}
                             </select>
@@ -126,12 +134,14 @@ function FGOCalculator() {
                     </div>
                     <div className='flex-[1.2] p-4'>
                         {[1,2,3,4,5].map(index => <div key={index}>
-                            <label>當前Extra技能{index}等級: </label>
+                            <label><input type="checkbox" checked={s[`isSkipExtraSkill${index}`]} onChange={e => handleUpdateLevel(s.id, `isSkipExtraSkill${index}`, !s[`isSkipExtraSkill${index}`])} />
+                            略過 </label>
+                            <label>Extra技能{index}: 當前等級 </label>
                             <select className='bg-white text-black border rounded-md' value={s[`currentExtraSkill${index}`]} onChange={(e) => {handleUpdateLevel(s.id, `currentExtraSkill${index}`, e.target.value); handleUpdateLevel(s.id, `targetExtraSkill${index}`, Math.max(s[`targetExtraSkill${index}`], e.target.value))}}>
                                 {[...Array(10).keys()].map(i => <option key={i+1} value={i+1}>{i+1}</option>)}
                             </select>
 
-                            <label style={{ marginLeft: '20px' }}>目標Extra技能{index}等級: </label>
+                            <label style={{ marginLeft: '20px' }}>目標等級 </label>
                             <select className='bg-white text-black border rounded-md' value={s[`targetExtraSkill${index}`]} onChange={(e) => {handleUpdateLevel(s.id, `targetExtraSkill${index}`, e.target.value); handleUpdateLevel(s.id, `currentExtraSkill${index}`, Math.min(s[`currentExtraSkill${index}`], e.target.value))}}>
                                 {[...Array(10).keys()].map(i => <option key={i+1} value={i+1}>{i+1}</option>)}
                             </select>
@@ -146,7 +156,7 @@ function FGOCalculator() {
         
         {/* 區塊三：最終計算結果 */}
         <section className="lg:col-span-12 rounded-2xl bg-blue-50/50 p-6 dark:bg-slate-800/40 border border-blue-100/50 dark:border-slate-700/50">
-            <h2 className="mb-4 text-xl font-bold">📊 總消耗素材統計</h2>
+            <h2 className="mb-4 text-xl font-bold">素材計算結果</h2>
             {Object.keys(totalRequired).length === 0 ? (
                 <p className="text-sm text-gray-500 dark:text-gray-400">目前沒有素材需求，請調整上方的目標等級。</p>
             ) : (
