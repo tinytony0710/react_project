@@ -38,4 +38,29 @@ export const materials = [
     { id: "caster_monument", name: "術階金像"},
     { id: "assassin_monument", name: "殺階金像"},
     { id: "berserker_monument", name: "狂階金像"},
+
+    
+    { id: "gem_of_saber", name: "劍之輝石"},
+    { id: "gem_of_archer", name: "弓之輝石"},
+    { id: "gem_of_lancer", name: "槍之輝石"},
+    { id: "gem_of_rider", name: "騎之輝石"},
+    { id: "gem_of_caster", name: "術之輝石"},
+    { id: "gem_of_assassin", name: "殺之輝石"},
+    { id: "gem_of_berserker", name: "狂之輝石"},
+
+    { id: "magic_saber_monument", name: "劍之魔石"},
+    { id: "magic_archer_monument", name: "弓之魔石"},
+    { id: "magic_lancer_monument", name: "槍之魔石"},
+    { id: "magic_rider_monument", name: "騎之魔石"},
+    { id: "magic_caster_monument", name: "術之魔石"},
+    { id: "magic_assassin_monument", name: "殺之魔石"},
+    { id: "magic_berserker_monument", name: "狂之魔石"},
+
+    { id: "secret_saber_monument", name: "劍之秘石"},
+    { id: "secret_archer_monument", name: "弓之秘石"},
+    { id: "secret_lancer_monument", name: "槍之秘石"},
+    { id: "secret_rider_monument", name: "騎之秘石"},
+    { id: "secret_caster_monument", name: "術之秘石"},
+    { id: "secret_assassin_monument", name: "殺之秘石"},
+    { id: "secret_berserker_monument", name: "狂之秘石"},
 ];

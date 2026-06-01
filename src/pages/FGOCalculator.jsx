@@ -107,7 +107,7 @@ function FGOCalculator() {
                     <h3 className='mb-4 text-lg font-bold flex items-center gap-2'>{s.name}<span><img className='w-1/3' src={ClassImageMap[s.class]} alt="" /></span></h3>
                     <div className='flex gap-4 divide-x divide-gray-300'>
                     <div className='flex-1 p-4'>
-                        <label><input type="checkbox" checked={s.isSkipAscension} onChange={e => handleUpdateLevel(s.id, 'isSkipAscension', !s.isSkipAscension)} />
+                        <label><input type="checkbox" checked={s.isSkipAscension} onChange={() => handleUpdateLevel(s.id, 'isSkipAscension', !s.isSkipAscension)} />
                         略過 </label>
                         <label>靈基: 當前等級 </label>
                         <select className='bg-white text-black border rounded-md' value={s.currentAscension} onChange={(e) => {handleUpdateLevel(s.id, 'currentAscension', e.target.value); handleUpdateLevel(s.id, 'targetAscension', Math.max(s.targetAscension, e.target.value))}}>
@@ -119,7 +119,7 @@ function FGOCalculator() {
                             {[...Array(5).keys()].map(i => <option key={i} value={i}>{i}</option>)}
                         </select>
                         {[1,2,3].map(index => <div key={index}>
-                            <label><input type="checkbox" checked={s[`isSkipSkill${index}`]} onChange={e => handleUpdateLevel(s.id, `isSkipSkill${index}`, !s[`isSkipSkill${index}`])} />
+                            <label><input type="checkbox" checked={s[`isSkipSkill${index}`]} onChange={() => handleUpdateLevel(s.id, `isSkipSkill${index}`, !s[`isSkipSkill${index}`])} />
                             略過 </label>
                             <label>技能{index}: 當前等級 </label>
                             <select className='bg-white text-black border rounded-md' value={s[`currentSkill${index}`]} onChange={(e) => {handleUpdateLevel(s.id, `currentSkill${index}`, e.target.value); handleUpdateLevel(s.id, `targetSkill${index}`, Math.max(s[`targetSkill${index}`], e.target.value))}}>
@@ -134,7 +134,7 @@ function FGOCalculator() {
                     </div>
                     <div className='flex-[1.2] p-4'>
                         {[1,2,3,4,5].map(index => <div key={index}>
-                            <label><input type="checkbox" checked={s[`isSkipExtraSkill${index}`]} onChange={e => handleUpdateLevel(s.id, `isSkipExtraSkill${index}`, !s[`isSkipExtraSkill${index}`])} />
+                            <label><input type="checkbox" checked={s[`isSkipExtraSkill${index}`]} onChange={() => handleUpdateLevel(s.id, `isSkipExtraSkill${index}`, !s[`isSkipExtraSkill${index}`])} />
                             略過 </label>
                             <label>Extra技能{index}: 當前等級 </label>
                             <select className='bg-white text-black border rounded-md' value={s[`currentExtraSkill${index}`]} onChange={(e) => {handleUpdateLevel(s.id, `currentExtraSkill${index}`, e.target.value); handleUpdateLevel(s.id, `targetExtraSkill${index}`, Math.max(s[`targetExtraSkill${index}`], e.target.value))}}>

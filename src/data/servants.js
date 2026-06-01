@@ -4,31 +4,31 @@ export const servants = [
         'name': "妖精騎士蘭斯洛特",
         'class': "Lancer",
         'ascension': [
-            {},//0->1
-            {'great_knight_medal': 15},
-            {'dragon_fang': 24, 'dragon_reverse_scale': 3},
-            {'reactor_core_of_dawn': 5, 'dragon_reverse_scale': 6},
+            {'lancer_piece': 5},//0->1
+            {'lancer_piece': 12, 'great_knight_medal': 15},
+            {'lancer_monument': 5, 'dragon_fang': 24, 'dragon_reverse_scale': 3},
+            {'lancer_monument': 12, 'reactor_core_of_dawn': 5, 'dragon_reverse_scale': 6},
         ],
         'skill': [
             {},//0->1 never used
-            {},//1->2
-            {},
-            {},
-            {'dragon_fang': 12},
-            {'dragon_fang': 24},
-            {'great_knight_medal': 10},
+            {'gem_of_lancer': 5},//1->2
+            {'gem_of_lancer': 12},
+            {'magic_lancer_monument': 5},
+            {'magic_lancer_monument': 12, 'dragon_fang': 12},
+            {'secret_lancer_monument': 5, 'dragon_fang': 24},
+            {'secret_lancer_monument': 12, 'great_knight_medal': 10},
             {'great_knight_medal': 20, 'aurora_steel': 6},
             {'small_bell_of_absolution': 72, 'aurora_steel': 18},
             {},//9->10
         ],
         'extra_skill': [
             {},//0->1 never used
-            {},//1->2
-            {},
-            {},
-            {'void_dust': 10},
-            {'void_dust': 20},
-            {'dragon_reverse_scale': 2},
+            {'gem_of_lancer': 5},//1->2
+            {'gem_of_lancer': 12},
+            {'magic_lancer_monument': 5},
+            {'magic_lancer_monument': 12, 'void_dust': 10},
+            {'secret_lancer_monument': 5, 'void_dust': 20},
+            {'secret_lancer_monument': 12, 'dragon_reverse_scale': 2},
             {'dragon_reverse_scale': 4, 'reactor_core_of_dawn': 4},
             {'scales_of_fantasy': 24, 'reactor_core_of_dawn': 11},
             {},//9->10
