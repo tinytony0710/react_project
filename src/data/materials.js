@@ -1,0 +1,41 @@
+export const materials = [
+    { id: "proof_of_hero", name: "英雄之證"},
+    { id: "evil_bone", name: "凶骨"},
+    { id: "dragon_fang", name: "龍之牙"},
+    { id: "void_dust", name: "虛影之塵"},
+    { id: "fool_chain", name: "愚者之鎖"},
+    { id: "deadly_poisonous_needle", name: "萬死的毒針"},
+    { id: "mystic_spinal_fluid", name: "魔術髓液"},
+    { id: "stake_of_wailing_night", name: "宵泣之鐵樁"},
+    { id: "mystic_gunpowder", name: "振盪火藥"},
+    { id: "small_bell_of_absolution", name: "赦免的小鐘"},
+    { id: "ceremonial_sword_of_twilight", name: "黃昏的儀式劍"},
+    { id: "ash_of_remembrance", name: "不忘之灰"},
+    { id: "obsidian_blade", name: "黑曜銳刃"},
+    { id: "remnant_of_madness", name: "瘋狂的殘渣"},
+
+    { id: "great_knight_medal", name: "大騎士勳章"},
+    { id: "shell_of_reminiscence", name: "追憶的貝殼"},
+    { id: "aurora_steel", name: "極光之鋼"},
+    { id: "scales_of_fantasy", name: "夢幻的鱗粉"},
+
+    { id: "dragon_reverse_scale", name: "龍之逆鱗"},
+    { id: "reactor_core_of_dawn", name: "曉光爐心"},
+
+
+    { id: "saber_piece", name: "劍階銀棋"},
+    { id: "archer_piece", name: "弓階銀棋"},
+    { id: "lancer_piece", name: "槍階銀棋"},
+    { id: "rider_piece", name: "騎階銀棋"},
+    { id: "caster_piece", name: "術階銀棋"},
+    { id: "assassin_piece", name: "殺階銀棋"},
+    { id: "berserker_piece", name: "狂階銀棋"},
+
+    { id: "saber_monument", name: "劍階金像"},
+    { id: "archer_monument", name: "弓階金像"},
+    { id: "lancer_monument", name: "槍階金像"},
+    { id: "rider_monument", name: "騎階金像"},
+    { id: "caster_monument", name: "術階金像"},
+    { id: "assassin_monument", name: "殺階金像"},
+    { id: "berserker_monument", name: "狂階金像"},
+];

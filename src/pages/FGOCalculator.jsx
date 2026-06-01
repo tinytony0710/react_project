@@ -2,126 +2,15 @@ import ServantList from '@/components/ServantList';
 import { useState } from 'react';
 import Lancer from '@/assets/Lancer.png'
 import Ruler from '@/assets/Ruler.png'
-
-export const mockMaterials = [
-    { id: "proof_of_hero", name: "英雄之證"},
-    { id: "evil_bone", name: "凶骨"},
-    { id: "dragon_fang", name: "龍之牙"},
-    { id: "void_dust", name: "虛影之塵"},
-    { id: "fool_chain", name: "愚者之鎖"},
-    { id: "deadly_poisonous_needle", name: "萬死的毒針"},
-    { id: "mystic_spinal_fluid", name: "魔術髓液"},
-    { id: "stake_of_wailing_night", name: "宵泣之鐵樁"},
-    { id: "mystic_gunpowder", name: "振盪火藥"},
-    { id: "small_bell_of_absolution", name: "赦免的小鐘"},
-    { id: "ceremonial_sword_of_twilight", name: "黃昏的儀式劍"},
-    { id: "ash_of_remembrance", name: "不忘之灰"},
-    { id: "obsidian_blade", name: "黑曜銳刃"},
-    { id: "remnant_of_madness", name: "瘋狂的殘渣"},
-
-    { id: "great_knight_medal", name: "大騎士勳章"},
-    { id: "shell_of_reminiscence", name: "追憶的貝殼"},
-    { id: "aurora_steel", name: "極光之鋼"},
-    { id: "scales_of_fantasy", name: "夢幻的鱗粉"},
-
-    { id: "dragon_reverse_scale", name: "龍之逆鱗"},
-    { id: "reactor_core_of_dawn", name: "曉光爐心"},
-
-
-    { id: "saber_piece", name: "劍階銀棋"},
-    { id: "archer_piece", name: "弓階銀棋"},
-    { id: "lancer_piece", name: "槍階銀棋"},
-    { id: "rider_piece", name: "騎階銀棋"},
-    { id: "caster_piece", name: "術階銀棋"},
-    { id: "assassin_piece", name: "殺階銀棋"},
-    { id: "berserker_piece", name: "狂階銀棋"},
-
-    { id: "saber_monument", name: "劍階金像"},
-    { id: "archer_monument", name: "弓階金像"},
-    { id: "lancer_monument", name: "槍階金像"},
-    { id: "rider_monument", name: "騎階金像"},
-    { id: "caster_monument", name: "術階金像"},
-    { id: "assassin_monument", name: "殺階金像"},
-    { id: "berserker_monument", name: "狂階金像"},
-];
+import { materials } from '@/data/materials';
+import { servants } from '@/data/servants';
 
 const ClassImageMap = {
     'Lancer': Lancer,
     'Ruler': Ruler,
 }
 
-export const mockServants = [
-    {
-        'id': 312,
-        'name': "妖精騎士蘭斯洛特",
-        'class': "Lancer",
-        'ascension': [
-            {},//0->1
-            {'great_knight_medal': 15},
-            {'dragon_fang': 24, 'dragon_reverse_scale': 3},
-            {'reactor_core_of_dawn': 5, 'dragon_reverse_scale': 6},
-        ],
-        'skill': [
-            {},//0->1 never used
-            {},//1->2
-            {},
-            {},
-            {'dragon_fang': 12},
-            {'dragon_fang': 24},
-            {'great_knight_medal': 10},
-            {'great_knight_medal': 20, 'aurora_steel': 6},
-            {'small_bell_of_absolution': 72, 'aurora_steel': 18},
-            {},//9->10
-        ],
-        'extra_skill': [
-            {},//0->1 never used
-            {},//1->2
-            {},
-            {},
-            {'void_dust': 10},
-            {'void_dust': 20},
-            {'dragon_reverse_scale': 2},
-            {'dragon_reverse_scale': 4, 'reactor_core_of_dawn': 4},
-            {'scales_of_fantasy': 24, 'reactor_core_of_dawn': 11},
-            {},//9->10
-        ],
-    },
-    {
-        'id': 390,
-        'name': "美露莘",
-        'class': "Ruler",
-        'ascension': [
-            {'archer_piece': 5, 'lancer_piece': 5, 'rider_piece': 5},//0->1
-            {'saber_piece': 5, 'caster_piece': 5, 'assassin_piece': 5, 'berserker_piece': 5},
-            {'archer_monument': 5, 'lancer_monument': 5, 'rider_monument': 5},
-            {'saber_monument': 5, 'caster_monument': 5, 'assassin_monument': 5, 'berserker_monument': 5},
-        ],
-        'skill': [
-            {},//0->1 never used
-            {},//1->2
-            {},
-            {},
-            {},
-            {},
-            {},
-            {'shell_of_reminiscence': 12},
-            {'dragon_reverse_scale': 15},
-            {},//9->10
-        ],
-        'extra_skill': [
-            {},//0->1 never used
-            {},//1->2
-            {},
-            {},
-            {},
-            {},
-            {},
-            {'great_knight_medal': 30},
-            {'scales_of_fantasy': 30},
-            {},//9->10
-        ],
-    },
-];
+
 
 function FGOCalculator() {
     // 狀態 1：已選擇要培養的從者清單
@@ -202,7 +91,7 @@ function FGOCalculator() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 py-8 px-4">
 
         {/* 區塊一：從者選擇區 */}
-        <ServantList servants={mockServants} selectedServants={selectedServants} onSelectServant={handleSelectServant} />
+        <ServantList servants={servants} selectedServants={selectedServants} onSelectServant={handleSelectServant} />
 
         {/* 區塊二：調整區 */}
         <section className="lg:col-span-9">
@@ -262,7 +151,7 @@ function FGOCalculator() {
                 <p className="text-sm text-gray-500 dark:text-gray-400">目前沒有素材需求，請調整上方的目標等級。</p>
             ) : (
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                {mockMaterials.map(m => {
+                {materials.map(m => {
                     const reqCount = totalRequired[m.id] || 0;
 
                     if (reqCount === 0) return null;

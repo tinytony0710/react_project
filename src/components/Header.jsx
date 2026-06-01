@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, NavLink, Route, Routes } from "react-router";
+import { useEffect } from "react";
+import { Link, NavLink } from "react-router";
 import { useTheme } from "next-themes";
 
 import Ilya from '@/assets/Ilya.jpg'
